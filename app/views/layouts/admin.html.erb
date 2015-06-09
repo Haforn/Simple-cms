@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Simple CMS | <%= @page_title || "Admin" %></title>
+	</head>
+	<%= stylesheet_link_tag('application', :media => 'all') %>
+	<%= javascript_include_tag('application') %>
+<body>
+
+<%# debug(params) %>
+	
+	<header>
+		<h1>Simple CMS Admin</h1>
+	</header>
+	
+	<content id="main">
+		
+		<% if !flash[:notice].blank? %> 
+			<div class="notice">
+				<%= flash[:notice] %>
+			</div>
+		<% end %>
+
+		<div id="content">
+			<!-- before yield -->
+			<%= yield %>
+			<!-- after yield -->
+		</div>
+	</content>
+	<footer>
+		<p class="copyright">&copy; Bart Hoekstra </p>
+	</footer>
+</body>
+</html>

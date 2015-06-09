@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Simple CMS <%= " | #{@page_title}" if @page_title %></title>
+	</head>
+	<%= stylesheet_link_tag('application', :media => 'all') %>
+	<%= javascript_include_tag('application') %>
+<body>
+
+<%# debug(params) %>
+	
+	<header>
+		<h1>Simple CMS</h1>
+	</header>
+	
+	<%= link_to 'Admin panel', admin_path %>
+	<%= link_to 'Login', login_path %>
+
+	<content id="main">
+
+		<div id="navigation">
+		<ul>
+			<% @subjects.each do |s| %>
+				<li>
+					<%= s.name %>
+					<% if s.pages.size > 0 %>
+					<ul>
+						<% s.pages.each do |p| %>
+							<li>
+								<%= link_to p.name, p.permalink %>
+							</li>
+						<% end %>
+					</ul>
+					<% end %>
+				</li>
+			<% end %>
+		</ul>
+		</div>
+
+		<div id="content">
+			<!-- before yield -->
+			<%= yield %>
+			<!-- after yield -->
+		</div>
+		<div class="clear">
+	</content>
+	<footer>
+		<p class="copyright">&copy; Bart Hoekstra </p>
+	</footer>
+</body>
+</html>
